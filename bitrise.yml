@@ -23,6 +23,21 @@ workflows:
             echo "Build's details can be found at: ${BITRISE_BUILD_URL}"
             echo "Public Install page at: ${BITRISE_PUBLIC_INSTALL_PAGE_URL}"
             echo "Build status: ${BITRISE_BUILD_STATUS}"
+    - slack@2.3.0:
+        is_always_run: false
+        run_if: .IsCI
+        inputs:
+        - webhook_url: https://hooks.slack.com/services/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
+        - channel: "#general"
+        - from_username: bitrise - ci
+        - from_username_on_error: bitrise - ci
+        - message: |-
+            Build's details can be found at: ${BITRISE_BUILD_URL}
+            Public Install page at: ${BITRISE_PUBLIC_INSTALL_PAGE_URL}
+            Build status: ${BITRISE_BUILD_STATUS}
+        - message_on_error: ''
+        - icon_url: ''
+        - icon_url_on_error: ''
   generate-keystore:
     steps:
     - script:

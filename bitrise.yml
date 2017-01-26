@@ -10,6 +10,19 @@ trigger_map:
   is_pull_request_allowed: true
   workflow: primary
 workflows:
+  deploy:
+    steps:
+    - deploy-to-bitrise-io@1.2.7: {}
+    - script@1.1.3:
+        title: Do anything with Script step
+        inputs:
+        - content: |-
+            #!/bin/bash
+            set -e
+            set -x
+            echo "Build's details can be found at: ${BITRISE_BUILD_URL}"
+            echo "Public Install page at: ${BITRISE_PUBLIC_INSTALL_PAGE_URL}"
+            echo "Build status: ${BITRISE_BUILD_STATUS}"
   generate-keystore:
     steps:
     - script:
